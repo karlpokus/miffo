@@ -1,6 +1,6 @@
 {
   "name": "miffo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Just another wrapper for the mongodb native driver in node.js",
   "main": "miffo.js",
   "scripts": {
