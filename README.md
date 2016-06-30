@@ -27,9 +27,11 @@ db.start(); // will log on success and throw otherwise
 db[collectionName].query({selectors}, {projections}, cb(err, data));
 
 // Methods
-db.oid(id) // generate mongo-style ObjectID
-db.bcrypt.hash // hash pwd (See bcrypt for details)
-db.bcrypt.compare // compare pwds
+db.oid() // new mongo-style ObjectID
+db.oid(id) // ObjectID from string
+oid.toHexString() // hex from ObjectID
+db.bcrypt.hash() // hash pwd (See bcrypt for details)
+db.bcrypt.compare() // compare pwds
 
 // close
 db.connection.close(); // the return object from connect is stored on db.connection
