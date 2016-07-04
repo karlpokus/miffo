@@ -15,17 +15,18 @@ var DB = module.exports = function(url, collections) {
   this.bcrypt = bcrypt;
 }
 
-DB.prototype.start = function() {
+DB.prototype.start = function(cb) {
   var self = this;
 
   mongo.connect(self.opts.url, function(err, db) {
     if (err) throw err;
-    console.log("Db connected");
+    console.log("db connected");
 
     self.opts.collections.forEach(function(c){
       self[c] = db.collection(c);
     });
 
     self.connection = db; // for db.connection.close();
+    if (cb) cb();
   });
 }
