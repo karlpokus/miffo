@@ -1,10 +1,10 @@
 {
   "name": "miffo",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Just another wrapper for the mongodb native driver in node.js",
   "main": "miffo.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape ./test/tests.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,10 @@
     "url": "https://github.com/karlpokus/miffo/issues"
   },
   "homepage": "https://github.com/karlpokus/miffo#readme",
+  "devDependencies": {
+    "console.mute": "*",
+    "tape": "*"
+  },
   "dependencies": {
     "bcrypt": "^0.8.7",
     "mongodb": "^2.1.18"
