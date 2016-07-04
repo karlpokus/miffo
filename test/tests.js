@@ -2,10 +2,11 @@ var test = require('tape'),
     settings = require('./settings.json'),
     url = settings.url,
     collections = settings.collections,
-    Miffo = require('../miffo.js');
-require('console.mute');
+    Miffo = require('../miffo.js'),
+    db = new Miffo(url, collections);
+    require('console.mute');
 
-test('constructor', function(t){
+test('bad args', function(t){
   [
     {a: {c: null, u: null}, d: 'Throws on no args'},
     {a: {c: ['miffo'], u: null}, d: 'Throws on no url'},
@@ -13,8 +14,10 @@ test('constructor', function(t){
   ].forEach(function(o){
     t.throws(function(){new Miffo(o.a.u, o.a.c)}, /Missing args/, o.d);
   });
-  
-  var db = new Miffo(url, collections);
+  t.end();
+});
+
+test('constructor', function(t){
   t.equal(db.opts.url, url, 'has .url');
   t.equal(db.opts.collections, collections, 'has .collections');
   t.equal(typeof db.oid, 'function', 'has .oid');
@@ -23,13 +26,12 @@ test('constructor', function(t){
 });
 
 test('start', function(t){
-  var db = new Miffo(url, collections);
   console.mute();
   
   db.start(function(){
     var data = console.resume();
     t.equal(data[0], 'db connected', 'connection');
-    t.equal(typeof db[settings.collections[0]].find, 'function', 'wrapper API');
+    t.equal(typeof db[collections[0]].find, 'function', 'wrapper API');
     db.connection.close();
     t.end();
   });
