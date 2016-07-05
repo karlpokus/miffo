@@ -21,7 +21,7 @@ var Miffo = require('miffo'),
     db = new Miffo(url, collections);
 
 // connect
-db.start(); // will log on success and throw otherwise
+db.start(<cb>); // logs on success and throws otherwise. Pass cb to do async.
 
 // wrapper API
 db[collectionName].query({selectors}, {projections}, cb(err, data));
@@ -34,11 +34,14 @@ db.bcrypt.hash() // hash pwd (See bcrypt for details)
 db.bcrypt.compare() // compare pwds
 
 // close
-db.connection.close(); // the return object from connect is stored on db.connection
+db.connection.close(); // the return object from mongo.connect is stored on db.connection
 ```
 
-# Todos
-- tests
+# Test
+```
+# All tests pass. Needs auth data from settings.json for query operations.
+$ npm test
+```
 
 # Licence
 MIT
